@@ -80,9 +80,14 @@ while count < nft_no + 1:
                 image_files[0].paste(trait, (0, 0), mask=trait)
 
         draw = ImageDraw.Draw(image_files[0])
+        width, height = image_files[0].size
+
         font = ImageFont.truetype("Poppins-Bold.ttf", 200)
+
         draw.text((150, 125), "#"+str(count), font_colour, font=font)
-        draw.text((900, 2250), name, font_colour, font=font)
+
+        w, h = draw.textsize(name, font=font)
+        draw.text(((width-w)/2, 2250), name, font_colour, font=font)
 
         image_files[0].save(os.path.dirname(os.path.realpath(__file__)) + "\\output\\" + "World #" + str(count) + ".png", "PNG")
 
