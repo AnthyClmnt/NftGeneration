@@ -54,7 +54,7 @@ while count < nft_no + 1:
     island_image = get_trait_image(dir_route, "\\" + "Islands" + "\\", island_opt)
     output_string += str(island_opt[0])
 
-    rare_trait = ["", 100]
+    rare_trait = island_opt
     for trait in traits:
         if trait != "Islands":
             trait_opt = choose_traits(os.listdir(dir_route + '\\' + trait + '\\'))
