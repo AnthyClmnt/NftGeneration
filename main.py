@@ -3,6 +3,8 @@ from PIL import Image, ImageFont, ImageDraw
 import random
 import os
 
+# MacOS
+
 island_route = os.listdir('./Input/')  # Base Route
 
 traits = ["Background", "Islands", "Rivers", "Top Decor"]  # Array of traits
