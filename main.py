@@ -6,7 +6,7 @@ import os
 path = os.path.join(os.path.dirname(__file__))  # Find project directory
 island_route = os.listdir(path + '/Input/')  # Base Route
 
-traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right Decor"]  # Array of traits
+traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right Decor", "Overlay"]  # Array of traits
 
 
 def get_traits(traits):
