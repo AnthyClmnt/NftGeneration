@@ -6,7 +6,7 @@ import os
 path = os.path.join(os.path.dirname(__file__))  # Find project directory
 island_route = os.listdir(path + '/Input/')  # Base Route
 
-traits = ["Background", "Islands", "Rivers", "Top Decor", "Ground Decor"]  # Array of traits
+traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right Decor"]  # Array of traits
 
 
 def get_traits(traits):
@@ -68,7 +68,7 @@ def gen_nft_name(rare_trait):
 
 completed_output = []  # Includes all created images to compare to see if unique
 count = 1  # Do not change
-nft_no = 25  # Number of images to generate
+nft_no = 5  # Number of images to generate
 # Will continuously generate images until count = number of images wanted + 1
 while count < nft_no + 1:
     image_files = []  # Array of layers in image
