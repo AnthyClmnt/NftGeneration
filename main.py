@@ -3,14 +3,11 @@ from PIL import Image, ImageFont, ImageDraw
 import random
 import os
 
-# MacOS
-
-island_route = os.listdir('./Input/')  # Base Route
-
-os.path.isabs(island_route)
+path = os.path.join(os.path.dirname(__file__))  # Find project directory
+island_route = os.listdir(path + '/Input/')  # Base Route
 
 traits = ["Background", "Islands", "Rivers", "Top Decor"]  # Array of traits
-"""My push ted"""
+
 
 def get_traits(traits):
     """
@@ -54,9 +51,7 @@ def get_trait_image(route, trait_type, trait):
     :param trait: The trait array chosen: [name, rarity]
     :return: The image of the chosen trait
     """
-    return Image.open(
-        os.path.dirname(os.path.realpath(__file__)) + route + trait_type + str(trait[0]) + "#" +
-        str(trait[1]) + ".png")
+    return Image.open(route + trait_type + str(trait[0]) + "#" + str(trait[1]) + ".png")
 
 
 def gen_nft_name(rare_trait):
@@ -73,7 +68,7 @@ def gen_nft_name(rare_trait):
 
 completed_output = []  # Includes all created images to compare to see if unique
 count = 1  # Do not change
-nft_no = 25  # Number of images to generate
+nft_no = 1  # Number of images to generate
 # Will continuously generate images until count = number of images wanted + 1
 while count < nft_no + 1:
     image_files = []  # Array of layers in image
@@ -83,20 +78,20 @@ while count < nft_no + 1:
     island_opt = choose_traits(island_route)  # Chooses island
 
     # Sets the directory route for the rest of the images
-    dir_route = '.\\Input\\' + str(island_opt[0]) + "#" + str(island_opt[1])
+    dir_route = path + '/Input/' + str(island_opt[0]) + "#" + str(island_opt[1])
 
-    island_image = get_trait_image(dir_route, "\\" + "Islands" + "\\", island_opt)  # Gets the island image
+    island_image = get_trait_image(dir_route, "/" + "Islands" + "/", island_opt)  # Gets the island image
     output_string += str(island_opt[0])  # Adds the name of island to output string
 
     rare_trait = island_opt  # Set the rare trait to first layer = island option
     # Loops through each trait
     for trait in traits:
         if trait != "Islands":  # Skips island choice
-            trait_opt = choose_traits(os.listdir(dir_route + '\\' + trait + '\\'))  # Chooses trait
+            trait_opt = choose_traits(os.listdir(dir_route + '/' + trait + '/'))  # Chooses trait
             if trait_opt[1] < rare_trait[1]:  # Checks if the trait is more rare than the current rare trait
                 rare_trait = trait_opt
 
-            trait_image = get_trait_image(dir_route, "\\" + trait + "\\", trait_opt)  # Gets the trait image
+            trait_image = get_trait_image(dir_route, "/" + trait + "/", trait_opt)  # Gets the trait image
             image_files.append(trait_image)  # Adds the trait image to array
             output_string += str(trait_opt[0])  # Adds the name of the trait to the output string
 
@@ -128,7 +123,7 @@ while count < nft_no + 1:
         draw.text((x_pos, 2250), name, font_colour, font=font)  # Draw the name of the image on the image
 
         # Save the image
-        image_files[0].save(os.path.dirname(os.path.realpath(__file__)) + "\\output\\" + "World #" + str(count) + ".png", "PNG")
+        image_files[0].save(path + "/output/" + "World #" + str(count) + ".png", "PNG")
 
         count += 1  # Increment the count by 1
         print("NFT MADE")  # Output to console
