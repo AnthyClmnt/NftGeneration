@@ -7,6 +7,8 @@ import os
 
 island_route = os.listdir('./Input/')  # Base Route
 
+os.path.isabs(island_route)
+
 traits = ["Background", "Islands", "Rivers", "Top Decor"]  # Array of traits
 """My push ted"""
 
