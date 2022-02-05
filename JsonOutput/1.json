@@ -1,0 +1,44 @@
+{
+    "name": "Bright Shore",
+    "description": "Meta Islands Collection",
+    "edition": 1,
+    "image": "Bright Shore.png",
+    "attributes": [
+        {
+            "trait_type": "Island",
+            "value": "Sand"
+        },
+        {
+            "trait_type": "Background",
+            "value": "Off White"
+        },
+        {
+            "trait_type": "Ground Decor",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Rivers",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Top Decor",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Right Decor",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Left Decor",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Overlay",
+            "value": "empty"
+        },
+        {
+            "trait_type": "Animals",
+            "value": "Giraffe"
+        }
+    ]
+}

@@ -2,12 +2,14 @@
 from PIL import Image, ImageFont, ImageDraw
 import random
 import os
+import json
 
 path = os.path.join(os.path.dirname(__file__))  # Find project directory
 island_route = os.listdir(path + '/Input/')  # Base Route
 
 # Array of trait types
-traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right Decor", "Left Decor", "Overlay"]
+traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right Decor",
+          "Left Decor", "Overlay", "Animals"]
 
 thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "Ice": ["Frost", "Glaze", "Freeze", "Glacier", "Polar", "Blizzard"],
@@ -32,6 +34,9 @@ thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "Pine Trees": ["Timber", "Pine Forrest", "Pine", "Wood"],
              "satellite": ["Satellite", "Orbiting", "Exploring"],
              "Veins": ["Veiny", "Erupting"],
+             "Ufo": ["UFO", "Aliens"],
+             "Fox": ["Foxy"],
+             "Giraffe": ["Giraffe"],
 
              "empty": ["Mini", "Tiny", "Empty", "Boring"]
              }
@@ -119,7 +124,7 @@ images_possible = combinations_num()
 
 completed_output = []  # Includes all created images to compare to see if unique
 count = 1  # Do not change
-nft_no = 50  # Number of images to generate
+nft_no = 2  # Number of images to generate
 # Will continuously generate images until count = number of images wanted + 1
 if images_possible > nft_no:
     while count < nft_no + 1:
@@ -127,10 +132,18 @@ if images_possible > nft_no:
         output_string = ""  # String of names of images to check if unique
         font_colour = (0, 0, 0)  # Default font colour is set to black
 
+        metaDataDict = {}
+        metaDataDict["attributes"] = []
+
         island_opt = choose_traits(island_route)  # Chooses island
 
         # Sets the directory route for the rest of the images
         dir_route = path + '/Input/' + str(island_opt[0]) + "#" + str(island_opt[1])
+
+        metadataTraits = {}
+        metadataTraits["trait_type"] = "Island"
+        metadataTraits["value"] = island_opt[0]
+        metaDataDict["attributes"].append(metadataTraits)
 
         island_image = get_trait_image(dir_route, "/" + "Islands" + "/", island_opt)  # Gets the island image
         output_string += str(island_opt[0])  # Adds the name of island to output string
@@ -140,6 +153,12 @@ if images_possible > nft_no:
         for trait in traits:
             if trait != "Islands":  # Skips island choice
                 trait_opt = choose_traits(os.listdir(dir_route + '/' + trait + '/'))  # Chooses trait
+
+                metadataTraits = {}
+                metadataTraits["trait_type"] = trait
+                metadataTraits["value"] = trait_opt[0]
+                metaDataDict["attributes"].append(metadataTraits)
+
                 if trait_opt[1] < rare_trait[1]:  # Checks if the trait is more rare than the current rare trait
                     rare_trait = trait_opt
 
@@ -159,6 +178,11 @@ if images_possible > nft_no:
         if output_string not in completed_output:  # Check if image's output string doesnt exist
             completed_output.append(output_string)  # Add output string to completed outputs
 
+            metaDataDict["name"] = name
+            metaDataDict["description"] = "Meta Islands Collection"
+            metaDataDict["edition"] = count
+            metaDataDict["image"] = str(name) + ".png"
+
             for trait in image_files:  # For all the traits
                 if trait != image_files[0]:  # No need to paste first layer over the first layer
                     image_files[0].paste(trait, (0, 0), mask=trait)  # Paste the layer over the background
@@ -170,14 +194,21 @@ if images_possible > nft_no:
 
             draw.text((150, 125), "#"+str(count), font_colour, font=font)  # Draw the number of the image on the image
 
-            #w, h = draw.textsize(name, font=font)  # Get the width, height of the text of the image
+            """
+            w, h = draw.textsize(name, font=font)  # Get the width, height of the text of the image
             #x_pos = (width-w)/2   # Calculate the starting x position relative of the font size
             #draw.text((x_pos, 2250), name, font_colour, font=font)  # Draw the name of the image on the image
-            #logo = Image.open("Logo.png")
-            #image_files[0].paste(logo, (0, 0), mask=logo)
+            """
 
             # Save the image
             image_files[0].save(path + "/output/" + "#" + str(count) + " " + name + ".png", "PNG")
+
+            # Save metadata
+            orderedData = ["name", "description", "edition", "image", "attributes"]
+            jsonString = json.dumps({k: metaDataDict[k] for k in orderedData}, indent=4)
+            textFile = open(os.path.dirname(os.path.realpath(__file__)) + "/JsonOutput/" + str(count) + ".json", "w")
+            textFile.write(jsonString)
+            textFile.close()
 
             count += 1  # Increment the count by 1
             print("NFT MADE")  # Output to console
