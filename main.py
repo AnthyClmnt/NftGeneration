@@ -15,6 +15,7 @@ thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "Ice": ["Frost", "Glaze", "Freeze", "Glacier", "Blizzard"],
              "Mars": ["Wasteland", "Galaxy", "Cosmos", "Space", "Planet"],
              "Sand": ["Desert", "Wasteland", "Shore", "Beach", "Sandy Hills"],
+             "Tropical": ["Exotic", "Island", "Tropical"],
 
              "Blizzard Blue": ["Blue", "Sapphire", "Sky", "Aqua"],
              "Outer Space": ["Dark", "Smokey", "Tragic", "Blackened", "Woeful"],
@@ -35,6 +36,8 @@ thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "satellite": ["Satellite", "Orbiting", "Exploring"],
              "Veins": ["Veiny", "Erupting"],
              "Ufo": ["UFO", "Aliens"],
+             "Treasure": ["Buried", "Fortune", "Treasure"],
+             "Palm Tree": ["Palm"],
 
              "Fox": ["Foxy"],
              "Giraffe": ["Giraffe"],
@@ -42,6 +45,7 @@ thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "Arctic Fox Family": ["Family", "Foxy", "Foxy Family"],
              "Polar Bear": ["Bear"],
              "Polar Bear Family": ["Bear", "Bear Family", "Family"],
+             "Parrot": ["Flock", "Parrot"],
 
              "empty": ["Mini", "Tiny", "Empty", "Boring"]
              }
@@ -57,9 +61,11 @@ def combinations_num():
         trait_number = 1
         for t in trait_route:
             trait_dir = os.listdir(os.path.dirname(os.path.realpath(__file__)) + "/Input/" + island + "/" + t)
+            print(trait_dir)
             trait_number = trait_number * len(trait_dir)
 
         number += trait_number
+        print(number)
 
     return number
 
