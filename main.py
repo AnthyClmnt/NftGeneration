@@ -12,7 +12,7 @@ traits = ["Background", "Islands", "Ground Decor", "Rivers", "Top Decor", "Right
           "Left Decor", "Overlay", "Animals"]
 
 thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
-             "Ice": ["Frost", "Glaze", "Freeze", "Glacier", "Polar", "Blizzard"],
+             "Ice": ["Frost", "Glaze", "Freeze", "Glacier", "Blizzard"],
              "Mars": ["Wasteland", "Galaxy", "Cosmos", "Space", "Planet"],
              "Sand": ["Desert", "Wasteland", "Shore", "Beach", "Sandy Hills"],
 
@@ -35,8 +35,13 @@ thesaurus = {"Green": ["Turf", "Grassland", "Meadow", "Field", "Lawn"],
              "satellite": ["Satellite", "Orbiting", "Exploring"],
              "Veins": ["Veiny", "Erupting"],
              "Ufo": ["UFO", "Aliens"],
+
              "Fox": ["Foxy"],
              "Giraffe": ["Giraffe"],
+             "Arctic Fox": "Foxy",
+             "Arctic Fox Family": ["Family", "Foxy", "Foxy Family"],
+             "Polar Bear": ["Bear"],
+             "Polar Bear Family": ["Bear", "Bear Family", "Family"],
 
              "empty": ["Mini", "Tiny", "Empty", "Boring"]
              }
@@ -121,10 +126,11 @@ def gen_nft_name(rare_trait_name, island_type_name):
 
 
 images_possible = combinations_num()
+print(images_possible)
 
 completed_output = []  # Includes all created images to compare to see if unique
 count = 1  # Do not change
-nft_no = 2  # Number of images to generate
+nft_no = 25  # Number of images to generate
 # Will continuously generate images until count = number of images wanted + 1
 if images_possible > nft_no:
     while count < nft_no + 1:
